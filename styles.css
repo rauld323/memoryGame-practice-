@@ -15,6 +15,7 @@ body {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  perspective: 1000px;
 }
 .card-memory {
   width: calc(25% - 10px);
@@ -22,8 +23,15 @@ body {
   margin: 5px;
   position: relative;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
 }
 
+.card-memory:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
 .front-face,
 .back-face {
   width: 100%;
@@ -32,4 +40,13 @@ body {
   position: absolute;
   border-radius: 5px;
   background: #1c7ccc;
+  backface-visibility: hidden; /* reveals the back picture, which is blue */
 }
+
+.card-memory.flip {
+  transform: rotateY(180deg); /* rotateY creates a 180 effect */
+}
+
+.front-face {
+  transform: rotateY(180deg);
+} /* this will allow for the back image to appear*/
